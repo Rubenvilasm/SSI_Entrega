@@ -1,0 +1,917 @@
+    1  sudo apt-get install chromium-browser
+    2  sudo apt autoremove 
+    3  cat /proc/sys/vm/swapiness
+    4  cat /proc/sys/vm/swappiness
+    5  sudo gedit /etc/sysclt.conf
+    6  sudo rm /etc/sysclt.conf
+    7  sudo gedit /etc/sysctl.conf
+    8  sudo gedit /etc/fstab 
+    9  sudo apt install ubuntu-restricted-extras 
+   10  sudo apt install ubuntu-restricted-addons libdvd-pkg 
+   11  sudo apt-get install chrome-gnome-shell 
+   12  sudo apt install vim
+   13  ls
+   14  vim text.txt
+   15  bash text.txt 
+   16  vim text.txt 
+   17  bash text.txt 
+   18  vim text.txt 
+   19  bash text.txt 
+   20  vim text.txt 
+   21  bash text.txt 
+   22  exit 
+   23  sudo vim /etc/hostname 
+   24  sudo reboot
+   25  who
+   26  whoami
+   27  who man
+   28  man who
+   29  who -l
+   30  man who
+   31  who -t
+   32  man who
+   33  who --version
+   34  exit
+   35  tail /var/log/auth.log 
+   36  less /home/ruben/.bash_history 
+   37  shutdown
+   38  shutdown now
+   39  java -version 
+   40  sudo apt-get update
+   41  sudo apt-get install r-base
+   42  wine R_TeachStat.exe 
+   43  sudo dpkg --add-architecture i386
+   44  wget -nc https://dl.winehq.org/wine-builds/winehq.key
+   45  sudo apt-key add winehq.key 
+   46  sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
+   47  sudo apt install --install-recommends winehq-stable 
+   48  ls
+   49  pwd
+   50  wine R_TeachStat.exe 
+   51  gedit iniciar_R.txt
+   52  ls
+   53  cd R_Commander/
+   54  chmod -rwx
+   55  cd ..
+   56  chmod -rwx iniciar_R.txt 
+   57  chmod +rwx iniciar_R.txt 
+   58  ls
+   59  cd Desktop/
+   60  bash iniciar_R.txt 
+   61  e
+   62  chmod +x Iniciar_R.sh 
+   63  touch init_R.sh
+   64  vim init_R.sh 
+   65  chmod -x init_R.sh 
+   66  ls -1 /dev/{ashmen,binder}
+   67  snap install --devmode --beta anbox
+   68  snap refresh --beta --devmode anbox
+   69  snap info anbox
+   70  snap remove anbox
+   71  sudo apt install ppa-ourge
+   72  sudo apt install ppa-purge
+   73  sudo ppa-purge ppa:morphis/anbox-support
+   74  gedit
+   75  cd Downloads/
+   76  ls
+   77  chmod a+x genymotion-3.1.1-linux_x64.bin 
+   78  sudo ./genymotion-3.1.1-linux_x64.bin 
+   79  genymotion-shell
+   80  sudo apt install virtualbox
+   81  sudo ln -s /usr/local/genymotion/genymotion /usr/local/bin/genymotion
+   82  sudo ln -s /usr/local/genymotion/genymotion-shell /usr/local/bin/genymotion-shell
+   83  sudo ln -s /usr/local/genymotion/player /usr/local/bin/genymotion-player
+   84  sudo ln -s /usr/local/genymotion/gmtool /usr/local/bin/gmtool
+   85  >sudo ln -s /usr/local/genymotion/genymotion /usr/local/bin/genymotion
+   86  sudo ln -s /usr/local/genymotion/genymotion-shell /usr/local/bin/genymotion-shell
+   87  sudo ln -s /usr/local/genymotion/player /usr/local/bin/genymotion-player
+   88  sudo ln -s /usr/local/genymotion/gmtool /usr/local/bin/gmtool
+   89  clear
+   90  ls
+   91  rm datos{}
+   92  rm datos *
+   93  rm Datos *
+   94  rm Datos*
+   95  rm Datos*.zip
+   96  rm Datos*{4}.zip
+   97  rm *.zip
+   98  ls
+   99  shutdown now
+  100  java --version
+  101  gedit hola.java
+  102  javac hola.java 
+  103  gedit hola.java
+  104  javac hola.java 
+  105  gedit hola.java
+  106  javac hola.java 
+  107  java hola 
+  108  rm hola.
+  109  rm hola.ja
+  110  rm hola.java 
+  111  rm hola.*
+  112  ls
+  113  vs code hola.java
+  114  code hola.java
+  115  java --version 
+  116  cd ./Desktop/2020-2021/SSI/P1/
+  117  gedit EjemploHash.java
+  118  code EjemploHash.java 
+  119  find jdk15on
+  120  javac EjemploHash.java 
+  121  java EjemploHash /home/ruben/winehq.key 
+  122  java EjemploHash EjemploHash.java 
+  123  javac EjemploDES.java 
+  124  java Ejemplo EjemploDES.java 
+  125  java EjemploDES 
+  126  java EjemploDES EjemploDES.java 
+  127  ls
+  128  less EjemploDES.java.cifrado 
+  129  diff EjemploDES.java EjemploDES.java.descifrado 
+  130  diff EjemploDES.java EjemploDES.java.cifrado 
+  131  diff -man
+  132  diff --m
+  133  diff --help
+  134  diff EjemploDES.java EjemploHash.java 
+  135  clear
+  136  history
+  137  s
+  138  ls
+  139  cd ..
+  140  ls
+  141  cherrytree Practicas_SSI.ctb 
+  142  cd P1/
+  143  javac EjemploRSA.java
+  144  mv /home/ruben/Downloads/bcprov-ext-jdk15on-166.jar .
+  145  ls
+  146  javac -classpath "bcprov-ext-jdk15on-166.jar" EjemploRSA.java 
+  147  java EjemploRSA 
+  148  java EjemploRSA EjemploDES.java
+  149  java EjemploRS
+  150  java EjemploRSA
+  151  java -classpath bcprov-ext-jdk15on-166.jar EjemploRSA
+  152  mv /home/ruben/Downloads/bcpkix-jdk15on-166.jar .
+  153  javac -classpath bcprov-ext-jdk15on-166.jar EjemploRSA.java 
+  154  java -classpath bcprov-ext-jdk15on-166.jar EjemploRSA
+  155  LS
+  156  ls
+  157  javac -cp .:bcprov-ext-jdk15on-166.jar EjemploRSA.java 
+  158  java -cp .:bcprov-ext-jdk15on-166.jar EjemploRSA 
+  159  javac -cp .:bcprov-ext-jdk15on-166.jar EjemploRSA.java 
+  160  java -cp .:bcprov-ext-jdk15on-166.jar EjemploRSA 
+  161  ls
+  162  javac -cp .:bcprov-ext-jdk15on-166.jar ComparativaDESRSA.java 
+  163  java -cp .:bcprov-ext-jdk15on-166.jar ComparativaDESRSA 
+  164  fg
+  165  ifconfig
+  166  ipconfig
+  167  sudo apt install net-tools
+  168  ifconfig
+  169  lspci -k
+  170  lsmod
+  171  clear
+  172  lsmod
+  173  find sky2 | lsmod 
+  174  find sky2
+  175  ip addr show
+  176  sudo ip link set  enp7s0 up
+  177  ip addr show
+  178  ifconfig -a
+  179  clear
+  180  ifconfig -a
+  181  sudo nano /etc/network/interfaces
+  182  sudo /etc/init.d/networking restart
+  183  sudo ifconfig enp7s0 down
+  184  sudo ifconfig enp7s0 up
+  185  ping google
+  186  ping google.com
+  187  clear
+  188  fping -q -a -c 1 -g 192.168.29.0/24
+  189  sudo apt install fping
+  190  fping -q -a -c 1 -g 192.168.29.0/24
+  191  ip addr
+  192  ip addr add 192.168.29.210/24 dev enp7s0 
+  193  ip link set enp7s0 up
+  194  ip link set enp7s0 down
+  195  sudo ip link set enp7s0 down
+  196  su
+  197  sudo 
+  198  su
+  199  su ruben
+  200  sudo ip addr add 192.168.29.210/24 dev enp7s0 
+  201  ifconfig
+  202  sudo ip link set enp7s0 up
+  203  ifconfig 
+  204  ping google.es
+  205  ping google.com
+  206  ping 8.8.8.8
+  207  sudo ip route add 0.0.0.0/0 via 192.168.29.1 dev enp7s0
+  208  ip route show
+  209  ping 0.0.0.0
+  210  ping 8.8.8.8
+  211  sudo ip route add 8.8.8.8/0 via 192.168.29.1 dev enp7s0
+  212  sudo ip route add 8.8.8.8/8 via 192.168.29.1 dev enp7s0
+  213  sudo ip route add default via 192.168.29.1 dev enp7s0
+  214  ip show
+  215  ifconfig
+  216  ipconfig
+  217  ifconfig
+  218  ifconfig 
+  219  ls
+  220  sudo ip route
+  221  sudo ip link
+  222  sudo ip link set down dev enp7s0
+  223  sudo ip link set up dev enp7s0
+  224  sudo ip link
+  225  sudo ip link set dev enp7s0 name eth0
+  226  sudo ip link set down dev enp7s0
+  227  sudo ip link set dev enp7s0 name eth0
+  228  sudo ip link
+  229  curl culmyip.com
+  230  dig
+  231  dig @193.147.87.2 aisa.ei.uvigo.es
+  232  ifconfig 
+  233  sudo ip link set up dev eth0
+  234  ifconfig 
+  235  nano /etc/resolv.conf 
+  236  sudo nano /etc/resolv.conf 
+  237  ping 8.8.8.8
+  238  sudo ip link set down dev eth0
+  239  ip link
+  240  ifconfig
+  241  sudo ip link set up dev eth0
+  242  ping 8.8.8.8
+  243  ip route
+  244  history
+  245  ping 8.8.8.8
+  246  ip link
+  247  nano /etc/resolv.conf 
+  248  sudo nano /etc/resolv.conf 
+  249  ping 8.8.8.8
+  250  sudo nano /etc/resolv.conf 
+  251  ip link
+  252  ifconfig
+  253  ip addr
+  254  ping 8.8.8.8
+  255  ip addr
+  256  ping 8.8.8.8
+  257  ip route
+  258  sudo ip route add default via 192.168.29.1
+  259  ping 8.8.8.8
+  260  sudo apt install okular
+  261  okular
+  262  sido apt install okular
+  263  sudo apt install okular
+  264  pwd
+  265  okular ./Downloads/Tema\ 2\ -\ Cálculo\ de\ Probabilidades.pdf 
+  266  cd ./Downloads/
+  267  unzip Datos.zip
+  268  find genymotion /
+  269  sudo apt-get install rar
+  270  rar Downloads/datos\ Tema\ 1.rar 
+  271  unrar Downloads/datos\ Tema\ 1.rar 
+  272  unrar x Downloads/datos\ Tema\ 1.rar 
+  273  top
+  274  htop
+  275  sudo snap install htop
+  276  htop
+  277  ls /opt/genymobile/genymotion/
+  278  find /opt/genymobile/genymotion/ *.bin
+  279  cd ./Desktop/2020-2021/SSI/P1/
+  280  LS
+  281  ls
+  282  mv bcpkix-jdk15on-166.jar bcprov-ext-jdk15on-166.jar ./../
+  283  cd ..
+  284  ls
+  285  cd P2
+  286  ls
+  287  javac AlmacenarClaves.java 
+  288  code AlmacenarClaves.java 
+  289  cd ..
+  290  mv bcpkix-jdk15on-166.jar bcprov-ext-jdk15on-166.jar  ./P2/
+  291  cd p2
+  292  cd P2/
+  293  ls
+  294  javac .:bcprov-ext-jdk15on-166.jar AlmacenarClaves.java
+  295  javac .:"bcprov-ext-jdk15on-166.jar" AlmacenarClaves.java
+  296  history
+  297  javac -cp .:bcprov-ext-jdk15on-166.jar AlmacenarClaves.java
+  298  java AlmacenarClaves 
+  299  java AlmacenarClaves  AlmacenarClaves.
+  300  java AlmacenarClaves  AlmacenarClaves.java 
+  301  cd ../PRUEBA/
+  302  LS
+  303  ls
+  304  code GenerarClaves.java PaqueteDAO.java Paquete.java 
+  305  mv ../P2/bcprov-ext-jdk15on-166.jar .
+  306  javac -cp .:bcprov-ext-jdk15on-166.jar  GenerarClaves.java 
+  307  java GenerarClaves 
+  308  mv ../P2/bcpkix-jdk15on-166.jar .
+  309  ls
+  310  javac -cp .:bcpkix-jdk15on-166.jar  GenerarClaves.java 
+  311  java GenerarClaves Paquete.java 
+  312  ping 8.8.8.8
+  313  ifconfig
+  314  history
+  315  ip route show
+  316  history
+  317  sudo ip link set dev enp7s0 name eth0
+  318  ipconfig
+  319  ifconfig
+  320  ip route 
+  321  ip route show
+  322  sudo ip route add default via 192.168.29.1
+  323  sudo ip addr add 192.168.29.210
+  324  sudo ip addr add 192.168.29.210 dev eth0 
+  325  sudo ip addr add 192.168.29.210/24 dev eth0 
+  326  ip route show
+  327  sudo ip route add default via 192.168.29.1
+  328  ping 8.8.8.8
+  329  ping google.es
+  330  sudo ip route add 8.8.8.8 via 192.168.29.1 dev eth0
+  331  ping google.es
+  332  ip route
+  333  vi /etc/resolv.conf 
+  334  fg
+  335  sudo vi /etc/resolv.conf 
+  336  historu
+  337  history
+  338  su
+  339  sudo -i
+  340  su
+  341  history
+  342  sudo -i
+  343  whois google.es
+  344  sudo apt install whois
+  345  whois google.es
+  346  whois grupoan.com
+  347  whois aberekin.com
+  348  code SSI.java
+  349  cd Desktop/2020-2021/SSI/P2
+  350  LS
+  351  ls
+  352  cd ..
+  353  mkdir Entregable
+  354  cd Entregable/
+  355  touch EmpaquetarExamen.java SellarExamen.java DesempaquetarExamen.java
+  356  code EmpaquetarExamen.java 
+  357  cd ..
+  358  ls
+  359  P2
+  360  cd P2
+  361  ls
+  362  cd ../P1
+  363  ls
+  364  code EjemploDES.
+  365  code EjemploDES.java
+  366  ls
+  367  cd ..
+  368  ls
+  369  cd P2/
+  370  ls
+  371  cd ..
+  372  find GenerarClaves.java
+  373  ls -r
+  374  man ls
+  375  ls -R
+  376  cd ..
+  377  mv  SSI/PRUEBA/GenerarClaves.java ./SSI/Entregable/
+  378  cd SSI/Entregable/
+  379  ls
+  380  code GenerarClaves.java 
+  381  javac GenerarClaves.java 
+  382  mv ../PRUEBA/bcprov-ext-jdk15on-166.jar .
+  383  javac -cp .:bcprov-ext-jdk15on-166.jar EmpaquetarExamen.java 
+  384  javac -cp .:bcprov-ext-jdk15on-166.jar GenerarClaves.java 
+  385  java GenerarClaves SellarExamen.java 
+  386  java GenerarClaves alumno
+  387  touch Apache-NetBeans-12.1-bin-linux-x64.sh
+  388  gedit Apache-NetBeans-12.1-bin-linux-x64.sh 
+  389  chmod +x Apache-NetBeans-12.1-bin-linux-x64.sh 
+  390  ./Apache-NetBeans-12.1-bin-linux-x64.sh 
+  391  mv ../PRUEBA/bcpkix-jdk15on-166.jar .
+  392  javac -cp .:bcpkix-jdk15on-166.jar GenerarClaves.java 
+  393  javac -cp .:bcprov-ext-jdk15on-166.jar GenerarClaves.java 
+  394  java GenerarClaves alumno
+  395  mv /home/ruben/Downloads/bcpkix-jdk15to18-166.jar .
+  396  javac -cp .:bcpkix-jdk15to18-166.jar GenerarClaves.java 
+  397  mv /home/ruben/Downloads/bcprov-ext-jdk15to18-166.jar .
+  398  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java 
+  399  java GenerarClaves alumno
+  400  java -version
+  401  rpm -Uvh jdk-7u21-linux-i586.rpm
+  402  sudo apt install rpm
+  403  rpm -Uvh jdk-7u21-linux-i586.rpm
+  404  su
+  405  java --version 
+  406  cd ./Downloads/
+  407  tar zxvf jre-8u261-linux-x64.tar.gz 
+  408  ls
+  409  mv jre1.8.0_261/ /usr/java/
+  410  mkdir java /usr/
+  411  mkdir java /usr/java
+  412  cd /usr/
+  413  ls
+  414  mkdir java
+  415  sudo mkdir java
+  416  ls
+  417  mv /home/ruben/Downloads/jre1.8.0_261/ .
+  418  sudo mv /home/ruben/Downloads/jre1.8.0_261/ .
+  419  ls
+  420  mv jre1.8.0_261/ ./java/
+  421  sudo mv jre1.8.0_261/ ./java/
+  422  ls
+  423  clear
+  424  sudo add-apt-repository ppa:webup8team/java
+  425  sudo add-apt-repository ppa:webup8team/java PPA
+  426  sudo add-apt-repository ppa:webup8team/javaPPA
+  427  sudo add-apt-repository ppa:webup8team/java_PPA
+  428  $ sudo add-apt-repository ppa:webupd8team/java
+  429  $sudo add-apt-repository ppa:webupd8team/java
+  430  su
+  431  cd /usr/local/netbeans-8.2/
+  432  ls
+  433  ./uninstall.sh 
+  434  sudo ./uninstall.sh 
+  435  cd
+  436  ls
+  437  java --version
+  438  whereis java
+  439  sudo apt-get install libcanberra-gtk-module libcanberra-gtk0
+  440  code PaqueteDAO.java 
+  441  cd ..
+  442  cd..
+  443  cd  ..
+  444  cd ..
+  445  ls
+  446  cd Downloads/
+  447  ls
+  448  chmod +x netbeans-8.1-linux.sh 
+  449  ./netbeans-8.1-linux.sh 
+  450  purgue netbeans-8.2rc/
+  451  javac
+  452  java
+  453  java -version
+  454  netbeans
+  455  sudo snap install netbeans
+  456  sudo snap install netbeans --classic
+  457  netbeans
+  458  cd /home/ruben/Downloads/
+  459  ls
+  460  cd /usr/lib/jvm/
+  461  ls
+  462  mv /home/ruben/Downloads/jdk-15_linux-x64_bin.tar.gz .
+  463  sudo mv /home/ruben/Downloads/jdk-15_linux-x64_bin.tar.gz .
+  464  ls
+  465  sudo tar -xvzf jdk-15_linux-x64_bin.tar.gz jdk-15/
+  466  sudo gedit /etc/environment
+  467  ls
+  468  sudo mv /home/ruben/Downloads/jdk-8u261-linux-x64.tar.gz .
+  469  sudo tar -xvzf jdk-8u261-linux-x64.tar.gz 
+  470  ls
+  471  sudo gedit /etc/environment
+  472  ls
+  473  cd jdk1.8.0_261/
+  474  ls
+  475  fg
+  476  cd /home/ruben/Desktop/2020-2021/SSI/
+  477  ls
+  478  cd Entregable/
+  479  ls
+  480  javac -cp .:bcprov-ext-jdk15 GenerarClaves.java 
+  481  javac -cp .:bcprov-ext-jdk15 GenerarClaves.java alumno
+  482  ls
+  483  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java alumno
+  484  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java
+  485  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves alumno
+  486  ls
+  487  cd ..
+  488  ls 
+  489  cd P1
+  490  ls
+  491  code Ejemplo
+  492  code EjemploDES.
+  493  ls
+  494  cd ..
+  495  ls
+  496  cd Entregable/
+  497  ls
+  498  javac -cp .:bcprov-ext-jdk15to18-166.jar PaqueteDAO.java 
+  499  java -cp .:bcprov-ext-jdk15to18-166.jar PaqueteDAO 
+  500  ls
+  501  rm alumno.* Apache-NetBeans-12.1-bin-linux-x64.sh 
+  502  ls
+  503  rm *.class
+  504  ls
+  505  touch examen.txt
+  506  vim examen.txt
+  507  ls
+  508  /home/ruben/Desktop/2020-2021/SSI/Entregablels
+  509  ls
+  510  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves profesor
+  511  dir
+  512  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves profesor
+  513  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves
+  514  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java 
+  515  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java profesor
+  516  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java profesor
+  517  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves profesor
+  518  ls
+  519  pwd
+  520  ls
+  521  mv {examen.txt,profesor.publica} /home/ruben/NetBeansProjects/EntregableSSI/
+  522  cd /home/ruben/NetBeansProjects/EntregableSSI/
+  523  ls
+  524  ls -l
+  525  ls -l
+  526  vim profesor.publica.cifrado 
+  527  ls
+  528  cd NetBeansProjects/EntregableSSI/
+  529  ls
+  530  vim examen.txt.cifrado 
+  531  ip link
+  532  sudo ip route add default 192.168.29.1
+  533  ip route
+  534  ip route show
+  535  sudo ip addr add 192.168.29.210 dev enp7s0 
+  536  sudo nano /etc/resolv.conf 
+  537  ping 8.8.8.8
+  538  ip link
+  539  sudo ip link set up
+  540  ifconfig
+  541  sudo ip route
+  542  sudo ip link set enp7s0 up
+  543  ifconfig
+  544  ping 8.8.8.8
+  545  sudo nano /etc/resolv.conf 
+  546  sudo ip route add default via 192.168.29.1
+  547  sudo ip addr
+  548  sudo ip addr add 192.168.29.210/24 dev enp7s0 
+  549  ping 8.8.8.8
+  550  sudo ip addr
+  551  ip route
+  552  sudo ip link set enp7s0 down
+  553  sudo ip link set enp7s0 up
+  554  ping google.com
+  555  sudo nano /etc/resolv.conf 
+  556  ping google.com
+  557  sudo ip link set enp7s0 down
+  558  sudo ip link set enp7s0 up
+  559  ping google.com
+  560  ping google.es
+  561  ip route
+  562  ping 192.168.29.1
+  563  ifconfig
+  564  ip route
+  565  sudo ip route add default via 192.168.29.1
+  566  ip route
+  567  ping google.com
+  568  gedit conectarRedes.sh
+  569  fg
+  570  gedit conectarRedes.sh
+  571  cd /home/ruben/Downloads/
+  572  ls
+  573  mv TEMA.O06G150V01505.Practicas.zip /home/ruben/Desktop/2020-2021/RCII/
+  574  cd /home/ruben/Desktop/2020-2021/RCII/
+  575  ls
+  576  unzip TEMA.O06G150V01505.Practicas.zip
+  577  ls
+  578  history
+  579  s
+  580  ls
+  581  pdf Practica6_VPN.pdf 
+  582  chromium Practica6_VPN.pdf 
+  583  sudo apt install libcanberra-gtk-module libcanberra-gtk3-module 
+  584  sudo apt autoremove
+  585  ls
+  586  chromium Practica6_VPN.pdf 
+  587  history
+  588  ssh 192.168.0.12
+  589  sudo apt-install kmod-tun
+  590  sudo apt install kmod-tun
+  591  sudo apt kmod-tun
+  592  sudo apt-get kmod-tun
+  593  sudo apt-get install -y kmod-tun
+  594  sudo apt-get install -y kmod
+  595  kmod-tun
+  596  zlib
+  597  sudo apt-get install openvpn
+  598  sudo ip addr add 192.158.0.12/24 
+  599  sudo ip addr add 192.158.0.12/24 dev enp7s0 
+  600  ip addr
+  601  ssh 192.168.0.12
+  602  ip addr add 192.168.101.0/24 dev enp7s0 
+  603  ip addr add 192.168.101.0 dev enp7s0 
+  604  history
+  605  ip addr add 192.168.101.0/24 dev enp7s0 
+  606  sudo ip addr add 192.168.101.0/24 dev enp7s0 
+  607  ssh 192.168.0.12
+  608  sudo ip addr add 192.168.0.12/24 dev enp7s0 
+  609  ssh 192.168.0.12
+  610  sudo ip addr del 192.168.0.12/24 dev enp7s0 
+  611  ip addr
+  612  sudo ip addr del 192.158.0.12/24 dev enp7s0 
+  613  sudo ip addr add 192.168.0.210/24 dev enp7s0 
+  614  ssh 192.168.0.12
+  615  ip route
+  616  sudo ip addr add 192.168.1.210/24
+  617  sudo ip addr add 192.168.1.210/24 dev enp7s0 
+  618  ssh 192.168.1.12
+  619  ping 192.168.1.12
+  620  ping 192.168.0.12
+  621  ip addr
+  622  ssh 192.168.1.12 -l root@provisional
+  623  ssh root@192.168.1.12
+  624  ip addr
+  625  ip route
+  626  ssh -l root 192.168.1.12
+  627  ip route
+  628  ip addr
+  629  ssh -l root 192.168.1.12
+  630  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 192.168.1.12
+  631  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 root@192.168.1.12
+  632  ssh -l root 192.168.1.12
+  633  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 root@192.168.1.12
+  634  iptables
+  635  ip tables
+  636  ls
+  637  vim strand
+  638  git
+  639  git bash
+  640  sudo apt install git
+  641  git 
+  642  git status
+  643  cd ./Desktop/2020-2021/SSI/Entregable/
+  644  git init
+  645  git status
+  646  git add .
+  647  git commit -m "Empaquetar examen creado"
+  648  git config --global rubenvilasm@gmail.com
+  649  git config --global "rubenvilasm@gmail.com"
+  650  git commit -m "Empaquetar examen creado"
+  651  git config --global user.mail "rubenvilasm@gmail.com"
+  652  git config --global user.name Ruben
+  653  git commit -m "Empaquetar examen creado"
+  654  git config --global --list
+  655  git status
+  656  git config --global user.name rubenvilasm
+  657  git commit -m "Empaquetar examen creado"
+  658  git push
+  659  git remote add SSI github.com/Rubenvilasm/SSI
+  660  git push
+  661  git push SSI
+  662  git push --set-upstream SSI master
+  663  git --global --list
+  664  git remote add SSI https://github.com/rubenvilasm/SSI
+  665  git push SSI main
+  666  git stauts
+  667  git status
+  668  git add .
+  669  git rm --cached SSI
+  670  git rm --cached -f SSI
+  671  ls
+  672  ls -l
+  673  cd SSI/
+  674  LS
+  675  ls
+  676  touch hola.txt
+  677  git add .
+  678  git commit -m "hola"
+  679  git push
+  680  git remote add SSI github.com/Rubenvilasm/SSI
+  681  git push SSI
+  682  git push SSI main
+  683  calc
+  684  sudo apt install calc
+  685  calc
+  686  sudo apt install ffmpeg
+  687  sudo add-apt-repository ppa:obsproject/obs-studio
+  688  sudo apt update
+  689  sudo apt install obs-studio
+  690  obs
+  691  code activida_indices.sql
+  692  OKULAR
+  693  okular
+  694  sudo apt update okular
+  695  sudo apt update
+  696  sudo snap install okular
+  697  okular --version
+  698  ls
+  699  code Desktop/2020-2021/SSI/Entregable/
+  700  spotify kidd keo
+  701  fg
+  702  spotify kidd keo
+  703  cd /usr/local/netbeans-8.2/
+  704  ls
+  705  ls -lR
+  706  ls -rR
+  707  locate netbeans
+  708  sudo apt install mlocate
+  709  locate netbeans
+  710  locate uninstall.sh
+  711  cd /home/ruben/
+  712  ls
+  713  cd ./netbeans-8.1/
+  714  ./uninstall.sh 
+  715  cd ../netbeans-8.2rc/
+  716  ./uninstall.sh 
+  717  ls
+  718  cd ..
+  719  ls
+  720  rm netbeans-8.2-linux.sh sorted.java text.txt 
+  721  rm strand 
+  722  ls
+  723  rm Strand.*
+  724  ls
+  725  cd ./Desktop/2020-2021/SSI/P2/
+  726  ls
+  727  cd ../P1/
+  728  ls
+  729  code EjemploRSA.
+  730  code EjemploRSA.java 
+  731  cd /home/ruben/Documents/
+  732  ls
+  733  locate NetbeansProyects
+  734  locate NetbeansProyect
+  735  locate Netbeans
+  736  cd ..
+  737  ls
+  738  pwd
+  739  cd NetBeansProjects/
+  740  ls
+  741  cd EntregableSSI/
+  742  ls
+  743  rm examen.txt.cifrado 
+  744  ls
+  745  cd /tmp/
+  746  ls
+  747  cd /
+  748  ls
+  749  cd /tmp/
+  750  ls
+  751  ls /tmp/
+  752  cd /home/ruben/Desktop/2020-2021/SSI/Entregable/
+  753  LS
+  754  Ls
+  755  ls
+  756  history
+  757  javac -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves.java 
+  758  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves profesor 
+  759  ls
+  760  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves alumno
+  761  ls
+  762  mv {profesor.publica,profesor.privada} /home/ruben/NetBeansProjects/EntregableSSI/
+  763  ls
+  764  obs
+  765  cd /home/ruben/
+  766  ls
+  767  mv 2020-10-* /home/ruben/Desktop/2020-2021/Grabaciones/
+  768  ls
+  769  cd /home/ruben/Desktop/2020-2021/Grabaciones/
+  770  ls
+  771  plater -vo 2020-10-26\ 12-54-50.mkv 
+  772  mplayer -vo 2020-10-26\ 12-54-50.mkv 
+  773  sudo apt install mplayer
+  774  mplayer -vo 2020-10-26\ 12-54-50.mkv 
+  775  mplayer -vo caca 2020-10-26\ 12-54-50.mkv 
+  776  mplayer  2020-10-26\ 12-54-50.mkv 
+  777  sudo apt install vlc
+  778  vlc 2020-10-26\ 12-55-02.mkv 
+  779  vlc 2020-10-27\ 12-40-37.mkv 
+  780  mv 2020-10-27\ 12-40-37.mkv bdii_indices.mkv
+  781  ls
+  782  vlc 2020-10-26\ 13-20-12.mkv 
+  783  mv 2020-10-26\ 13-20-12.mkv est_cartas.mkv
+  784  vlc 2020-10-26\ 12-54-50.mkv 
+  785  rm 2020-10-26\ 12-54-50.mkv 
+  786  vlc 2020-10-26\ 12-55-02.mkv 
+  787  mv 2020-10-26\ 12-55-02.mkv est_cartas1.mkv
+  788  mv est_cartas.mkv est_cartas2.mkv
+  789  ls
+  790  sudo apt remove mplayer 
+  791  cd ./NetBeansProjects/EntregableSSI/
+  792  ls
+  793  code examen.descifrado 
+  794  code examen.txt
+  795  code examen.descifrado 
+  796  cd ./Desktop/2020-2021/SSI/E
+  797  cd ./Desktop/2020-2021/SSI/Entregable/
+  798  ls
+  799  cd ../P1/
+  800  ls
+  801  code EjemploHash.
+  802  code EjemploHash.java 
+  803  cd ..
+  804  code .
+  805  ls
+  806  cd Entregable/
+  807  ls
+  808  java -cp .:bcprov-ext-jdk15to18-166.jar GenerarClaves alumno
+  809  mv {alumno.privada,alumno.publica} /home/ruben/NetBeansProjects/EntregableSSI/
+  810  ls
+  811  apache-tomcat-8.0.27/
+  812  apache
+  813  netbeans
+  814  locate *.ctb
+  815  clear
+  816  sudo ip addr add 192.168.29.1 dev enp7s0 
+  817  sudo ip route add refault via 192.168.29.1
+  818  sudo ip route add default via 192.168.29.1
+  819  ip link
+  820  sudo ip route add default via 192.168.29.1 dev enp7s0
+  821  sudo ip link set enp7s0 up
+  822  ip link
+  823  sudo ip link set enp7s0 up
+  824  ip link
+  825  sudo ip route add default via 192.168.29.1
+  826  ip route
+  827  sudo ip addr add 192.168.29.226/24 dev enp7s0 
+  828  ip route
+  829  ip addr
+  830  sudo nano /etc/resolv.conf 
+  831  ping google.es
+  832  ping 192.168.29.1
+  833  ping 192.168.29.224
+  834  ping 192.168.29.128
+  835  ip addr
+  836  sudo nano /etc/resolv.conf 
+  837  ip addr
+  838  ip addr del 192.168.29.1
+  839  ip addr del 192.168.29.1 dev enp7s0 
+  840  ip addr del 192.168.29.1/32 dev enp7s0 
+  841  sudo ip addr del 192.168.29.1/32 dev enp7s0 
+  842  sudo ip addr add 192.168.29.1/24 dev enp7s0 
+  843  ping google.es
+  844  ping 8.8.8.8
+  845  ip addr
+  846  ip route
+  847  sudo ip link set enp7s0 down
+  848  sudo ip link set enp7s0 up
+  849  ping google.es
+  850  sudo nano /etc/resolv.conf 
+  851  ping google.es
+  852  ping 8.8.8.8
+  853  ip link
+  854  ip addr
+  855  ip route
+  856  sudo ip route add default via 192.168.29.1
+  857  ping google.es
+  858  sudo nano /etc/resolv.conf 
+  859  ping 1.0.0.1
+  860  ip link
+  861  ping 1.0.0.1
+  862  dmesg
+  863  ip route
+  864  ping 192.168.29.1
+  865  ip addr
+  866  ping 1.0.0.1
+  867  sudo ip addr del 192.168.29.226/24 dev enp7s0 
+  868  sudo ip addr add 192.168.29.126/24 dev enp7s0 
+  869  ping 1.0.0.1
+  870  ping 192.168.29.127
+  871  sudo ip addr add 182.168.101.0/24 dev enp7s0 
+  872  ssh -l root 192.168.1.12
+  873  sudo ip addr add 192.168.0.12
+  874  sudo ip addr add 192.168.0.12 dev enp7s0 
+  875  sudo ip addr add 192.168.1.126/24 dev enp7s0 
+  876  ssh -l root 192.168.1.12
+  877  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -l root 192.168.1.12
+  878  ip addr
+  879  sudo ip addr del 182.168.101.0/24 dev enp7s0 
+  880  sudo ip addr add 192.168.101.0/24 dev enp7s0 
+  881  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -l root 192.168.1.12
+  882  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 root@192.168.1.12
+  883  ip addr
+  884  ssh 192.168.101.1
+  885  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 root@192.168.1.12
+  886  history
+  887  ssh 192.168.0.12
+  888  ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 root@192.168.1.12
+  889  history
+  890  sudo ip addr add 192.168.0.128/24 dev enp7s0 
+  891  ssh 192.168.0.12
+  892  ping 192.168.0.12
+  893  ip addr
+  894  sudo ip addr del 192.168.0.12/32
+  895  sudo ip addr del 192.168.0.12/32 dev enp7s0 
+  896  ssh 192.168.0.12
+  897  sudo ip addr del 192.168.0.12/32 dev enp7s0 
+  898  sudo ip addr
+  899  ip route
+  900  ssh 192.168.0.12
+  901  ssh 192.168.1.12
+  902  history
+  903  ip route
+  904  ip addr
+  905  ip addr add 192.168.101.126/24 dev enp7s0 
+  906  sudo ip addr add 192.168.101.126/24 dev enp7s0 
+  907  ssh 192.168.101.1
+  908  ip route
+  909  sudo ip route add 192.168.101.0/24 via 192.168.101.1
+  910  cd /home/ruben/NetBeansProjects/
+  911  ls
+  912  cd EntregableSSI/
+  913  ls
+  914  vim examen.txt.cifrado 
+  915  vim examen.descifrado 
+  916  history
+  917  history > historial.txt
