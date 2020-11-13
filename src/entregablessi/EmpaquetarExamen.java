@@ -68,17 +68,14 @@ public class EmpaquetarExamen {
         byte[] buffer = new byte[1000];
         byte[] bufferCifrado = null;
         FileInputStream in = null;
-        
-        
-        byte[] buffer1 =null;
+
+        byte[] buffer1 = null;
         try {
-            buffer1= Files.readAllBytes(Paths.get(args[0]));
+            buffer1 = Files.readAllBytes(Paths.get(args[0]));
         } catch (IOException ex) {
             Logger.getLogger(EmpaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         try {
             bufferCifrado = cifrador.doFinal(buffer1);
         } catch (IllegalBlockSizeException e) {
@@ -86,8 +83,7 @@ public class EmpaquetarExamen {
         } catch (BadPaddingException ex) {
             System.err.println("Error: Relleno incorrecto");
         }
-        
-        
+
         PublicKey publicaProfesor = recuperarClavePublica(args[1]);
         byte[] bufferPlano = clave.getEncoded();
 
@@ -142,9 +138,8 @@ public class EmpaquetarExamen {
         mostrarBytes(resumen);
 
         /*CIfrado del hash con KR alumno*/
-        
         PrivateKey privadaAlumno = recuperarClavePrivada(args[2]);
-        
+
         try {
             cifrador.init(Cipher.ENCRYPT_MODE, privadaAlumno);
         } catch (InvalidKeyException ex) {
@@ -152,7 +147,7 @@ public class EmpaquetarExamen {
         }
         byte[] cifradoAlumno = null;
         try {
-             cifradoAlumno = cifrador.doFinal(resumen);
+            cifradoAlumno = cifrador.doFinal(resumen);
         } catch (IllegalBlockSizeException ex) {
             System.err.println("Error: Tamano de bloque incorrecto.");
         } catch (BadPaddingException ex) {
@@ -161,10 +156,9 @@ public class EmpaquetarExamen {
         /*Añadimos el bloque firma que acabamos de crear con messageDigest al paquete*/
         p.anadirBloque("FIRMA", cifradoAlumno);
         PaqueteDAO.escribirPaquete("/tmp/paquete1.bin", p);
-        
+
         mostrarPaquete(p);
-        
-        
+
     }
 
     private static PublicKey recuperarClavePublica(String nombre) {
@@ -225,12 +219,11 @@ public class EmpaquetarExamen {
     public static void mostrarBytes(byte[] buffer) {
         System.out.write(buffer, 0, buffer.length);
     }
-    
-    
+
     private static PrivateKey recuperarClavePrivada(String nombre) {
         KeyFactory keyFactoryRSA = null;
         try {
-            keyFactoryRSA = KeyFactory.getInstance("RSA","BC");
+            keyFactoryRSA = KeyFactory.getInstance("RSA", "BC");
         } catch (NoSuchAlgorithmException ex) {
             System.err.println("Error: No existe tal algoritmo.");
         } catch (NoSuchProviderException ex) {
@@ -251,7 +244,6 @@ public class EmpaquetarExamen {
         } catch (IOException ex) {
             System.err.println("Error: Error de entrada/salida");
         }
-        
 
         PKCS8EncodedKeySpec clavePrivadaSpec = new PKCS8EncodedKeySpec(bufferPriv);
         PrivateKey clavePrivada = null;
@@ -264,8 +256,8 @@ public class EmpaquetarExamen {
         return clavePrivada;
     }
 
-      public static void mostrarPaquete(Paquete p){
-          
+    public static void mostrarPaquete(Paquete p) {
+
         List<String> nombresBloque = p.getNombresBloque();
         System.out.println("\n");
         for (String actual : nombresBloque) {
@@ -273,5 +265,5 @@ public class EmpaquetarExamen {
             mostrarBytes(p.getContenidoBloque(actual));
             System.out.println("\n\n\n");
         }
-      }
+    }
 }
