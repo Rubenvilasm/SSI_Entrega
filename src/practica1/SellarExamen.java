@@ -36,6 +36,11 @@ import paquete.PaqueteDAO;
 public class SellarExamen {
 
     public static void main(String args[]){
+        if (args.length != 2) {
+            System.out.println("Faltan argumentos.");
+            System.exit(1);
+        }
+        
         Security.addProvider(new BouncyCastleProvider());
         System.out.println("Sellando el paquete: "+args[0]);
         String dir = "/tmp/"+args[0];

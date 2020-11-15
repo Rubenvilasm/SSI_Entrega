@@ -16,7 +16,6 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
@@ -25,8 +24,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
@@ -37,9 +34,9 @@ import paquete.PaqueteDAO;
 public class DesempaquetarExamen {
 
     public static void main(String[] args) {
-        /*if (args.length != 2) {
+        if (args.length != 4) {
             System.exit(1);
-        }*/
+        }
 
         String dir = "/tmp/" + args[0];
         Paquete paquete = PaqueteDAO.leerPaquete(dir);
