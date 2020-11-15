@@ -1,4 +1,4 @@
-package entregablessi;
+package practica1;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,7 +58,6 @@ public class EmpaquetarExamen {
         /*
         *Creamos el fichero cifrado con DES, que será el que se incluya en el paquete
          */
-        byte[] buffer = new byte[1000];
         byte[] bufferCifrado = null;
         FileInputStream in = null;
 

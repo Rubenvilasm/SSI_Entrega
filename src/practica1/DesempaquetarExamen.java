@@ -1,4 +1,4 @@
-package entregablessi;
+package practica1;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,12 +36,12 @@ import paquete.PaqueteDAO;
 
 public class DesempaquetarExamen {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         /*if (args.length != 2) {
             System.exit(1);
         }*/
-        
-        String dir = "/tmp/"+args[0];
+
+        String dir = "/tmp/" + args[0];
         Paquete paquete = PaqueteDAO.leerPaquete(dir);
 
         System.out.println("Desempaquetado del examen.");
@@ -88,15 +88,15 @@ public class DesempaquetarExamen {
 
         messageDigest.update(examenCifrado);
         messageDigest.update(claveSecretaCifrada);
-
+        Boolean flag_resumen = false;
         byte[] resumen = messageDigest.digest();
         System.out.println("Comprobamos que el examen y la clave secreta enviado por el alumno es igual al enviado por la autoridad.");
         if (!Arrays.equals(resumen1, resumen)) {
-            System.exit(1);
+            flag_resumen = true;
             System.out.println("Error en la comprobacion de examen y clave secreta. No coinciden.");
         }
         String s = new String(paquete.getContenidoBloque("FECHA"));
-        System.out.println("Sellado en "+s);
+        System.out.println("Sellado en " + s);
         byte[] bytes_sellado = paquete.getContenidoBloque("SELLADO");
         cifrador = null;
         PublicKey autoridadPublica = recuperarClavePublica(args[3]);
@@ -135,87 +135,91 @@ public class DesempaquetarExamen {
         messageDigest.update(paquete.getContenidoBloque("FIRMA"));
 
         byte[] sellado2 = messageDigest.digest();
-
-        System.out.println("Comprobamos que el sellado es correcto.");
+        boolean flag_sellado = false;
+        System.out.println("Comprobando si el sellado es correcto...");
         if (!Arrays.equals(sellado1, sellado2)) {
+            flag_sellado = true;
             System.out.println("No son guales");
         }
 
         //Ya que todo esta correcto, procedemos a mostrar el examen.
-        PrivateKey privadaProfesor = recuperarClavePrivada(args[2]);
-        try {
-            cifrador = Cipher.getInstance("RSA", "BC");
-        } catch (NoSuchAlgorithmException ex) {
-            System.err.println("Error: NO existe tal algoritmo");
-        } catch (NoSuchProviderException ex) {
-            System.err.println("Error. No existe tal proveedor");
-        } catch (NoSuchPaddingException ex) {
-            System.err.println("Error: No existe tal relleno.");
-        }
-        try {
-            cifrador.init(Cipher.DECRYPT_MODE, privadaProfesor);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (!flag_resumen && !flag_sellado) {
+            PrivateKey privadaProfesor = recuperarClavePrivada(args[2]);
+            try {
+                cifrador = Cipher.getInstance("RSA", "BC");
+            } catch (NoSuchAlgorithmException ex) {
+                System.err.println("Error: NO existe tal algoritmo");
+            } catch (NoSuchProviderException ex) {
+                System.err.println("Error. No existe tal proveedor");
+            } catch (NoSuchPaddingException ex) {
+                System.err.println("Error: No existe tal relleno.");
+            }
+            try {
+                cifrador.init(Cipher.DECRYPT_MODE, privadaProfesor);
+            } catch (InvalidKeyException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        byte[] claveDES = null;
+            byte[] claveDES = null;
 
-        try {
-            claveDES = cifrador.doFinal(paquete.getContenidoBloque("CLAVE_SECRETA"));
-        } catch (IllegalBlockSizeException ex) {
-            System.err.println("Error: Tamano de bloque incorrecto en resumen1");
-        } catch (BadPaddingException ex) {
-            System.err.println("Error: Relleno incorrecto en resumen1");
-        }
+            try {
+                claveDES = cifrador.doFinal(paquete.getContenidoBloque("CLAVE_SECRETA"));
+            } catch (IllegalBlockSizeException ex) {
+                System.err.println("Error: Tamano de bloque incorrecto en resumen1");
+            } catch (BadPaddingException ex) {
+                System.err.println("Error: Relleno incorrecto en resumen1");
+            }
 
-        SecretKeyFactory factoryDES = null;
-        try {
-            factoryDES = SecretKeyFactory.getInstance("DES");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        SecretKey clavePrivada = null;
-        try {
-            clavePrivada = factoryDES.generateSecret(new DESKeySpec(claveDES));
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            SecretKeyFactory factoryDES = null;
+            try {
+                factoryDES = SecretKeyFactory.getInstance("DES");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            SecretKey clavePrivada = null;
+            try {
+                clavePrivada = factoryDES.generateSecret(new DESKeySpec(claveDES));
+            } catch (InvalidKeyException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvalidKeySpecException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        FileOutputStream out = null;
+            FileOutputStream out = null;
 
-        try {
-            out = new FileOutputStream("examen_descifrado.txt");
-        } catch (FileNotFoundException ex) {
+            try {
+                out = new FileOutputStream("examen_descifrado.txt");
+            } catch (FileNotFoundException ex) {
+
+            }
+            byte[] bufferExamen = null;
+            try {
+                cifrador = Cipher.getInstance("DES/ECB/PKCS5Padding");
+                cifrador.init(Cipher.DECRYPT_MODE, clavePrivada);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchPaddingException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvalidKeyException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                bufferExamen = cifrador.doFinal(paquete.getContenidoBloque("EXAMEN_CIFRADO"));
+            } catch (IllegalBlockSizeException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BadPaddingException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                out.write(bufferExamen);
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Examen descrifrado en la carpeta Claves con nombre 'examen_descifrado.txt'");
 
         }
-        byte[] bufferExamen = null;
-        try {
-            cifrador = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            cifrador.init(Cipher.DECRYPT_MODE,clavePrivada);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            bufferExamen = cifrador.doFinal(paquete.getContenidoBloque("EXAMEN_CIFRADO"));
-        } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BadPaddingException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            out.write(bufferExamen);
-            out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Examen descrifrado en la carpeta Claves con nombre 'examen_descifrado.txt'");
 
     }
 
