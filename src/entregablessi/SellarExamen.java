@@ -38,20 +38,21 @@ public class SellarExamen {
 
     public static void main(String args[]){
         Security.addProvider(new BouncyCastleProvider());
+        System.out.println("Sellando el paquete: "+args[0]);
+        String dir = "/tmp/";
+        dir = dir.concat(args[0]);
         
-        Paquete paquete = PaqueteDAO.leerPaquete("/tmp/paquete1.bin");
+        Paquete paquete = PaqueteDAO.leerPaquete(dir);
         Calendar cal = Calendar.getInstance();
         System.out.println(cal.getTime().toString());
         byte[] buffer_fecha = cal.getTime().toString().getBytes();
         paquete.anadirBloque("FECHA", buffer_fecha);
 
-        PaqueteDAO.escribirPaquete("/tmp/paquete1.bin", paquete);
+        PaqueteDAO.escribirPaquete(dir, paquete);
 
         EmpaquetarExamen.mostrarPaquete(paquete);
 
         byte[] buffer_firma = paquete.getContenidoBloque("FIRMA");
-        System.out.println("---------------FIRMA--------------");
-        EmpaquetarExamen.mostrarBytes(buffer_firma);
         byte[] buffer_examen = paquete.getContenidoBloque("EXAMEN_CIFRADO");
         byte[] buffer_clave = paquete.getContenidoBloque("CLAVE_SECRETA");
 
@@ -75,7 +76,7 @@ public class SellarExamen {
         Cipher cifrador = null;
         byte[] bufferSellado = null;
        
-        PrivateKey privadaAutoridad = recuperarClavePrivada(args[0]);
+        PrivateKey privadaAutoridad = recuperarClavePrivada(args[1]);
         try {
             cifrador = Cipher.getInstance("RSA", "BC");
             cifrador.init(Cipher.ENCRYPT_MODE, privadaAutoridad);
