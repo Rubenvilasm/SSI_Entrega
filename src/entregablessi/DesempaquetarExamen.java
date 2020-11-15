@@ -25,8 +25,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.util.Arrays;
-import java.util.Base64;
-import java.util.Calendar;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
@@ -36,7 +34,7 @@ import paquete.PaqueteDAO;
 
 public class DesempaquetarExamen {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         /*if (args.length != 2) {
             System.exit(1);
         }*/
@@ -47,7 +45,6 @@ public class DesempaquetarExamen {
         System.out.println("Iniciamos el desempaquetado por DES del fichero");
 
         Security.addProvider(new BouncyCastleProvider());
-        paquete.getContenidoBloque(nombresBloque.get(1));
 
         Cipher cifrador = null;
         try {
@@ -59,11 +56,10 @@ public class DesempaquetarExamen {
         } catch (NoSuchPaddingException ex) {
             System.err.println("Error: No existe tal relleno.");
         }
-        
+
         PublicKey publicaAlumno = recuperarClavePublica(args[0]);
-        EmpaquetarExamen.mostrarPaquete(paquete);
         try {
-            cifrador.init(Cipher.DECRYPT_MODE,publicaAlumno);
+            cifrador.init(Cipher.DECRYPT_MODE, publicaAlumno);
         } catch (InvalidKeyException ex) {
             System.err.println("Error: CLave privada no valida.");
         }
@@ -75,10 +71,10 @@ public class DesempaquetarExamen {
         } catch (BadPaddingException ex) {
             System.err.println("Error: Relleno incorrecto en resumen1");
         }
-        
+
         byte[] examenCifrado = paquete.getContenidoBloque("EXAMEN_CIFRADO");
         byte[] claveSecretaCifrada = paquete.getContenidoBloque("CLAVE_SECRETA");
-        
+
         MessageDigest messageDigest = null;
         try {
 
@@ -92,16 +88,60 @@ public class DesempaquetarExamen {
         messageDigest.update(claveSecretaCifrada);
 
         byte[] resumen = messageDigest.digest();
-        
-        if(!Arrays.equals(resumen1, resumen)){
+
+        if (!Arrays.equals(resumen1, resumen)) {
             System.exit(1);
         }
-        
-        
-        
-        
-        
+
+        //Calendar date = paquete.getContenidoBloque("FECHA");
+        //  System.out.println(date.length);
+        String s = new String(paquete.getContenidoBloque("FECHA"));
+        System.out.println(s);
+        byte[] bytes_sellado = paquete.getContenidoBloque("SELLADO");
         cifrador = null;
+        PublicKey autoridadPublica = recuperarClavePublica(args[2]);
+        try {
+            cifrador = Cipher.getInstance("RSA", "BC");
+            cifrador.init(Cipher.DECRYPT_MODE, autoridadPublica);
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("Error: No existe tal algoritmo de encriptacion");
+        } catch (InvalidKeyException e) {
+            System.err.println("Error: No existe tal clave o es invalida.");
+        } catch (NoSuchPaddingException e) {
+            System.err.println("Error: No existe tal relleno.");
+        } catch (NoSuchProviderException e) {
+            System.err.println("Error: No existe tal provider.");
+        }
+        byte[] sellado1 = null;
+        try {
+            sellado1 = cifrador.doFinal(bytes_sellado);
+        } catch (IllegalBlockSizeException ex) {
+            System.err.println("Error: Tamano de bloque incorrecto en resumen1");
+        } catch (BadPaddingException ex) {
+            System.err.println("Error: Relleno incorrecto en resumen1");
+        }
+
+        messageDigest = null;
+        try {
+
+            messageDigest = MessageDigest.getInstance("SHA");
+
+        } catch (NoSuchAlgorithmException ex) {
+            System.err.println("Error:NO existe tal algoritmo en digest.");
+        }
+        messageDigest.update(paquete.getContenidoBloque("FECHA"));
+        messageDigest.update(paquete.getContenidoBloque("EXAMEN_CIFRADO"));
+        messageDigest.update(paquete.getContenidoBloque("CLAVE_SECRETA"));
+        messageDigest.update(paquete.getContenidoBloque("FIRMA"));
+
+        byte[] sellado2 = messageDigest.digest();
+
+        if (!Arrays.equals(sellado1, sellado2)) {
+            System.out.println("No son guales");
+        }
+
+        //Ya que todo esta correcto, procedemos a mostrar el examen.
+        PrivateKey privadaProfesor = recuperarClavePrivada(args[1]);
         try {
             cifrador = Cipher.getInstance("RSA", "BC");
         } catch (NoSuchAlgorithmException ex) {
@@ -111,58 +151,55 @@ public class DesempaquetarExamen {
         } catch (NoSuchPaddingException ex) {
             System.err.println("Error: No existe tal relleno.");
         }
-        
-        PrivateKey privadaProfesor = recuperarClavePrivada(args[1]);
-        EmpaquetarExamen.mostrarPaquete(paquete);
         try {
-            cifrador.init(Cipher.DECRYPT_MODE,privadaProfesor);
+            cifrador.init(Cipher.DECRYPT_MODE, privadaProfesor);
         } catch (InvalidKeyException ex) {
-            System.err.println("Error: CLave privada no valida.");
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        byte[] bufferKS = null;
+
+        byte[] claveDES = null;
+
         try {
-            bufferKS = cifrador.doFinal(paquete.getContenidoBloque("CLAVE_SECRETA"));
+            claveDES = cifrador.doFinal(paquete.getContenidoBloque("CLAVE_SECRETA"));
         } catch (IllegalBlockSizeException ex) {
             System.err.println("Error: Tamano de bloque incorrecto en resumen1");
         } catch (BadPaddingException ex) {
             System.err.println("Error: Relleno incorrecto en resumen1");
         }
-        
-        SecretKeyFactory secretKeyFactoryDES;
-        SecretKey claveSecreta = null;
+
+        SecretKeyFactory factoryDES = null;
         try {
-            secretKeyFactoryDES = SecretKeyFactory.getInstance("DES");
-            DESKeySpec DESspec;
-            DESspec = new DESKeySpec(bufferKS);
-             claveSecreta = secretKeyFactoryDES.generateSecret(DESspec);
+            factoryDES = SecretKeyFactory.getInstance("DES");
         } catch (NoSuchAlgorithmException ex) {
-            System.err.println("Error: No existe tal algoritmo.");
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SecretKey clavePrivada = null;
+        try {
+            clavePrivada = factoryDES.generateSecret(new DESKeySpec(claveDES));
         } catch (InvalidKeyException ex) {
-            System.err.println("Error: Clave DESKey invalida.");
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeySpecException ex) {
-            System.err.println("Error: clave KeySpec invalida.");
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        try {
-            cifrador = Cipher.getInstance("DES/ECB/PKCS5Padding");
-        } catch (NoSuchAlgorithmException ex) {
-            System.err.println("Error: No existe tal algoritmo");
-        } catch (NoSuchPaddingException ex) {
-            System.err.println("Error: No existe tal relleno.");
-        }
-        try {
-            cifrador.init(Cipher.DECRYPT_MODE, claveSecreta);
-        } catch (InvalidKeyException ex) {
-            System.err.println("Error: claveSecreta invalida.");
-        }
+
         FileOutputStream out = null;
+
         try {
-             out = new FileOutputStream("examen.descifrado");
+            out = new FileOutputStream("examen.descifrado");
         } catch (FileNotFoundException ex) {
-            System.err.println("Error: NO existe tal archivo");
+
         }
         byte[] bufferExamen = null;
+        try {
+            cifrador = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            cifrador.init(Cipher.DECRYPT_MODE,clavePrivada);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             bufferExamen = cifrador.doFinal(paquete.getContenidoBloque("EXAMEN_CIFRADO"));
         } catch (IllegalBlockSizeException ex) {
@@ -170,34 +207,27 @@ public class DesempaquetarExamen {
         } catch (BadPaddingException ex) {
             Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             out.write(bufferExamen);
             out.close();
         } catch (IOException ex) {
-            System.err.println("Error: IO exception");
+            Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        //Calendar date = paquete.getContenidoBloque("FECHA");
-      //  System.out.println(date.length);
-        String s = new String(paquete.getContenidoBloque("FECHA"));
-        System.out.println(s);
-    
+
     }
 
     private static PrivateKey recuperarClavePrivada(String nombre) {
         KeyFactory keyFactoryRSA = null;
         try {
-            keyFactoryRSA = KeyFactory.getInstance("RSA","BC");
+            keyFactoryRSA = KeyFactory.getInstance("RSA", "BC");
         } catch (NoSuchAlgorithmException ex) {
             System.err.println("Error: No existe tal algoritmo.");
         } catch (NoSuchProviderException ex) {
             System.err.println("Error: No existe tal provider.");
         }
         File ficheroClavePrivada = new File(nombre);
-        
+
         int tamanoFicheroClavePrivada = (int) ficheroClavePrivada.length();
         byte[] bufferPriv = new byte[tamanoFicheroClavePrivada];
         FileInputStream in = null;
@@ -212,7 +242,6 @@ public class DesempaquetarExamen {
         } catch (IOException ex) {
             System.err.println("Error: Error de entrada/salida");
         }
-        
 
         PKCS8EncodedKeySpec clavePrivadaSpec = new PKCS8EncodedKeySpec(bufferPriv);
         PrivateKey clavePrivada = null;
@@ -224,8 +253,8 @@ public class DesempaquetarExamen {
 
         return clavePrivada;
     }
-    
-     private static PublicKey recuperarClavePublica(String nombre) {
+
+    private static PublicKey recuperarClavePublica(String nombre) {
         File ficheroClavePublica = new File(nombre);
         int tamanoFicheroClavePublica = (int) ficheroClavePublica.length();
         byte[] bufferPublica = new byte[tamanoFicheroClavePublica];
