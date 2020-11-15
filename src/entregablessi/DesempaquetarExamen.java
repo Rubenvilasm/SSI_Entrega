@@ -25,6 +25,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
@@ -38,11 +40,11 @@ public class DesempaquetarExamen {
         /*if (args.length != 2) {
             System.exit(1);
         }*/
-        Paquete paquete = PaqueteDAO.leerPaquete("/tmp/paquete1.bin");
-        List<String> nombresBloque = paquete.getNombresBloque();
-        System.out.println(nombresBloque.toString());
+        
+        String dir = "/tmp/"+args[0];
+        Paquete paquete = PaqueteDAO.leerPaquete(dir);
 
-        System.out.println("Iniciamos el desempaquetado por DES del fichero");
+        System.out.println("Desempaquetado del examen.");
 
         Security.addProvider(new BouncyCastleProvider());
 
@@ -57,7 +59,7 @@ public class DesempaquetarExamen {
             System.err.println("Error: No existe tal relleno.");
         }
 
-        PublicKey publicaAlumno = recuperarClavePublica(args[0]);
+        PublicKey publicaAlumno = recuperarClavePublica(args[1]);
         try {
             cifrador.init(Cipher.DECRYPT_MODE, publicaAlumno);
         } catch (InvalidKeyException ex) {
@@ -88,18 +90,16 @@ public class DesempaquetarExamen {
         messageDigest.update(claveSecretaCifrada);
 
         byte[] resumen = messageDigest.digest();
-
+        System.out.println("Comprobamos que el examen y la clave secreta enviado por el alumno es igual al enviado por la autoridad.");
         if (!Arrays.equals(resumen1, resumen)) {
             System.exit(1);
+            System.out.println("Error en la comprobacion de examen y clave secreta. No coinciden.");
         }
-
-        //Calendar date = paquete.getContenidoBloque("FECHA");
-        //  System.out.println(date.length);
         String s = new String(paquete.getContenidoBloque("FECHA"));
-        System.out.println(s);
+        System.out.println("Sellado en "+s);
         byte[] bytes_sellado = paquete.getContenidoBloque("SELLADO");
         cifrador = null;
-        PublicKey autoridadPublica = recuperarClavePublica(args[2]);
+        PublicKey autoridadPublica = recuperarClavePublica(args[3]);
         try {
             cifrador = Cipher.getInstance("RSA", "BC");
             cifrador.init(Cipher.DECRYPT_MODE, autoridadPublica);
@@ -136,12 +136,13 @@ public class DesempaquetarExamen {
 
         byte[] sellado2 = messageDigest.digest();
 
+        System.out.println("Comprobamos que el sellado es correcto.");
         if (!Arrays.equals(sellado1, sellado2)) {
             System.out.println("No son guales");
         }
 
         //Ya que todo esta correcto, procedemos a mostrar el examen.
-        PrivateKey privadaProfesor = recuperarClavePrivada(args[1]);
+        PrivateKey privadaProfesor = recuperarClavePrivada(args[2]);
         try {
             cifrador = Cipher.getInstance("RSA", "BC");
         } catch (NoSuchAlgorithmException ex) {
@@ -185,7 +186,7 @@ public class DesempaquetarExamen {
         FileOutputStream out = null;
 
         try {
-            out = new FileOutputStream("examen.descifrado");
+            out = new FileOutputStream("examen_descifrado.txt");
         } catch (FileNotFoundException ex) {
 
         }
@@ -214,6 +215,7 @@ public class DesempaquetarExamen {
         } catch (IOException ex) {
             Logger.getLogger(DesempaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("Examen descrifrado en la carpeta Claves con nombre 'examen_descifrado.txt'");
 
     }
 

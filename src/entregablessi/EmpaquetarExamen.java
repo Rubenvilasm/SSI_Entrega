@@ -3,7 +3,6 @@ package entregablessi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,17 +10,11 @@ import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.crypto.*;
-import javax.crypto.interfaces.*;
-
-import javax.crypto.spec.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import paquete.Paquete;
 import paquete.PaqueteDAO;
@@ -29,12 +22,12 @@ import paquete.PaqueteDAO;
 public class EmpaquetarExamen {
 
     public static final void main(String[] args) {
-        if (args.length != 3) {
+        if (args.length != 4) {
+            System.out.println("Faltan argumentos. <fichero_examen> <nombre_paquete> <profesor.publica> <alumno.privada>");
             System.exit(1);
         }
 
         //CLave DES
-        System.out.println("1.Generamos la clave DES");
         KeyGenerator generadorDES;
         SecretKey clave = null;
         Security.addProvider(new BouncyCastleProvider());
@@ -73,7 +66,7 @@ public class EmpaquetarExamen {
         try {
             buffer1 = Files.readAllBytes(Paths.get(args[0]));
         } catch (IOException ex) {
-            Logger.getLogger(EmpaquetarExamen.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error: Error leyendo el fichero a cifrar.");
         }
 
         try {
@@ -84,7 +77,7 @@ public class EmpaquetarExamen {
             System.err.println("Error: Relleno incorrecto");
         }
 
-        PublicKey publicaProfesor = recuperarClavePublica(args[1]);
+        PublicKey publicaProfesor = recuperarClavePublica(args[2]);
         byte[] bufferPlano = clave.getEncoded();
 
         try {
@@ -107,14 +100,14 @@ public class EmpaquetarExamen {
         } catch (BadPaddingException ex) {
             System.err.println("Error: Error en el relleno.");
         }
-
-        System.out.println("BuferCifrado");
-        mostrarBytes(bufferCifradoKS); //A realizar hash y añadir al paquete CLAVE SECRETA
+        System.out.println("Añadiendo Examen y clave secreta al paquete...");
+        String dir = "/tmp/"+args[1];//A realizar hash y añadir al paquete CLAVE SECRETA
         Paquete p = new Paquete();
         p.anadirBloque("Examen cifrado", bufferCifrado);
         p.anadirBloque("Clave secreta", bufferCifradoKS);
-        PaqueteDAO.escribirPaquete("/tmp/paquete1.bin", p);
-        System.out.println("\nPaquete guardado");
+        PaqueteDAO.escribirPaquete(dir, p);
+        
+        
 
         /*HASHING
             ¿Como uno el examen pasado por des y la KS pasada por RSA?
@@ -134,11 +127,9 @@ public class EmpaquetarExamen {
 
         byte[] resumen = messageDigest.digest();
 
-        System.out.println("Resumen:");
-        mostrarBytes(resumen);
 
         /*CIfrado del hash con KR alumno*/
-        PrivateKey privadaAlumno = recuperarClavePrivada(args[2]);
+        PrivateKey privadaAlumno = recuperarClavePrivada(args[3]);
 
         try {
             cifrador.init(Cipher.ENCRYPT_MODE, privadaAlumno);
@@ -154,10 +145,12 @@ public class EmpaquetarExamen {
             System.err.println("Error: El relleno es incorrecto.");
         }
         /*Añadimos el bloque firma que acabamos de crear con messageDigest al paquete*/
+        System.out.println("Añadiendo firma al paquete...");
         p.anadirBloque("FIRMA", cifradoAlumno);
-        PaqueteDAO.escribirPaquete("/tmp/paquete1.bin", p);
+        PaqueteDAO.escribirPaquete(dir, p);
+        System.out.println("\nPaquete guardado en: "+dir);
+        
 
-        mostrarPaquete(p);
 
     }
 
